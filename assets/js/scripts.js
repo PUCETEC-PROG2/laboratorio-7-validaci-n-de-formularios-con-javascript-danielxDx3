@@ -1,20 +1,22 @@
+// assets/js/scripts.js
+
 // Esperar a que el DOM esté completamente cargado
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.querySelector('form');
-    
-    // Escuchar el evento submit del formulario
-    form.addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevenir envío por defecto
-        
-        // Llamar a la función de validación
-        if (validateForm()) {
-            alert('✅ ¡Formulario válido! Registro exitoso.');
-            // Opcional: limpiar el formulario después de enviar
-            // form.reset();
-        } else {
-            alert('❌ Por favor, corrija los errores en el formulario.');
-        }
-    });
+document.addEventListener('DOMContentLoaded', function () {
+  console.log('✅ JavaScript conectado correctamente');
+
+  const form = document.querySelector('form');
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault(); // Evita el envío tradicional
+
+    if (validateForm()) {
+      alert('✅ ¡Formulario válido! Registro exitoso.');
+      // Opcional: limpiar formulario
+      // form.reset();
+    } else {
+      alert('❌ Por favor, corrija los errores en el formulario.');
+    }
+  });
 });
 
 /**
@@ -22,172 +24,108 @@ document.addEventListener('DOMContentLoaded', function() {
  * Retorna true si todos los campos son válidos, false si hay errores
  */
 function validateForm() {
-    let isValid = true;
-    
-    // ==========================================
-    // VALIDACIÓN DE EJEMPLO: Campo Nombre
-    // ==========================================
-    const nombre = document.getElementById('nombre');
-    const valorNombre = nombre.value.trim();
-    
-    if (valorNombre === '') {
-        // Campo vacío - marcar como inválido
-        nombre.classList.add('no-valid');
-        isValid = false;
-    } else if (valorNombre.length < 2) {
-        // Muy corto - marcar como inválido
-        nombre.classList.add('no-valid');
-        isValid = false;
-    } else {
-        // Campo válido - remover marca de error si existe
-        nombre.classList.remove('no-valid');
-    }
-    
-    // ==========================================
-    // TODO: Validar Apellido Paterno
-    // ==========================================
-    // Requisitos: No vacío, mínimo 2 caracteres
-    // Pista: Usa getElementById('apellidoPaterno')
-    const apellidoPaterno = document.getElementById("apellidoPaterno");
-    const valorApellidoPateno = apellidoPaterno.value.trim();
+  let isValid = true;
 
-    if (valorApellidoPateno === '') {
-        // Campo vacío - marcar como inválido
-        valorApellidoPateno.classList.add('no-valid');
-        isValid = false;
-    } else if (valorApellidoPateno.length < 2) {
-        // Muy corto - marcar como inválido
-        valorApellidoPateno.classList.add('no-valid');
-        isValid = false;
-    } else {
-        // Campo válido - remover marca de error si existe
-        valorApellidoPateno.classList.remove('no-valid');
-    }
-    
-    // ==========================================
-    // TODO: Validar Apellido Materno
-    // ==========================================
-    // Requisitos: No vacío, mínimo 2 caracteres
-    
-    const apellidoMaterno = document.getElementById("apellidoPaterno");
-    const valorapellidoMaterno = apellidoMaterno.value.trim();
+  // =========================
+  // Obtener campos por ID
+  // =========================
+  const nombre = document.getElementById('nombre');
+  const apellidoPaterno = document.getElementById('apellidoPaterno');
+  const apellidoMaterno = document.getElementById('apellidoMaterno');
+  const cedula = document.getElementById('cedula');
+  const motivo = document.getElementById('motivo');
+  const tipoCuenta = document.getElementById('tipoCuenta');
 
-    if (valorapellidoMaterno === '') {
-        // Campo vacío - marcar como inválido
-        valorapellidoMaterno.classList.add('no-valid');
-        isValid = false;
-    } else if (valorapellidoMaterno.length < 2) {
-        // Muy corto - marcar como inválido
-        valorapellidoMaterno.classList.add('no-valid');
-        isValid = false;
-    } else {
-        // Campo válido - remover marca de error si existe
-        valorapellidoMaterno.classList.remove('no-valid');
-    }
-    
-    // ==========================================
-    // TODO: Validar Cédula
-    // ==========================================
-    // Requisitos: Exactamente 10 dígitos numéricos
-    // Pista: Usa /^\d{10}$/.test(valor) para validar
-    
-    const Cedula = document.getElementById("apellidoPaterno");
-    const valorCedula = Cedula.value.trim();
-    const regex = "/^\d{10}$/";
+  const calle = document.getElementById('calle');
+  const numero = document.getElementById('numero');
+  const interseccion = document.getElementById('interseccion');
 
-    if (!regex.test(valorCedula)) {
-        Cedula.classList.add('no-vaild')
-        isValid = false
-    }    else {
-        Cedula.classList.remove('no-vaild');
-    }
-    
-    
-    // ==========================================
-    // TODO: Validar Motivo
-    // ==========================================
-    // Requisitos: No vacío, mínimo 10 caracteres
-    
-    const ValidarMotivo = document.getElementById("apellidoPaterno");
-    const valorValidarMotivo = ValidarMotivo.value.trim();
+  const foto = document.getElementById('foto'); // input type="file"
 
-    if (valorValidarMotivo === '') {
-        // Campo vacío - marcar como inválido
-        valorValidarMotivo.classList.add('no-valid');
-        isValid = false;
-    } else if (valorValidarMotivo.length < 10) {
-        // Muy corto - marcar como inválido
-        valorValidarMotivo.classList.add('no-valid');
-        isValid = false;
-    } else {
-        // Campo válido - remover marca de error si existe
-        valorValidarMotivo.classList.remove('no-valid');
-    }
-        
-    
-    // ==========================================
-    // TODO: Validar Tipo de Cuenta
-    // ==========================================
-    // Requisitos: Debe tener un valor seleccionado (no vacío)
-    // Pista: Verifica que select.value !== ''
-    
-    // Tu código aquí...
-    
-    
-    // ==========================================
-    // TODO: Validar Calle
-    // ==========================================
-    // Requisitos: No vacío, mínimo 3 caracteres
-    
-    // Tu código aquí...
-    
-    
-    // ==========================================
-    // TODO: Validar Número
-    // ==========================================
-    // Requisitos: No vacío
-    
-    // Tu código aquí...
-    
-    
-    // ==========================================
-    // TODO: Validar Intersección
-    // ==========================================
-    // Requisitos: No vacío, mínimo 3 caracteres
-    
-    // Tu código aquí...
-    
-    
-    // Retornar el resultado final de la validación
-    return isValid;
+  // =========================
+  // Validaciones
+  // =========================
+
+  // 1) Nombre: no vacío, min 2
+  if (!validarCampoTexto(nombre, 2)) isValid = false;
+
+  // 2) Apellido paterno: no vacío, min 2
+  if (!validarCampoTexto(apellidoPaterno, 2)) isValid = false;
+
+  // 3) Apellido materno: no vacío, min 2
+  if (!validarCampoTexto(apellidoMaterno, 2)) isValid = false;
+
+  // 4) Cédula: exactamente 10 dígitos numéricos
+  const valorCedula = cedula.value.trim();
+  const regexCedula = /^\d{10}$/;
+
+  if (!regexCedula.test(valorCedula)) {
+    cedula.classList.add('no-valid');
+    isValid = false;
+  } else {
+    cedula.classList.remove('no-valid');
+  }
+
+  // 5) Motivo: no vacío, min 10 caracteres
+  const valorMotivo = motivo.value.trim();
+  if (valorMotivo === '' || valorMotivo.length < 10) {
+    motivo.classList.add('no-valid');
+    isValid = false;
+  } else {
+    motivo.classList.remove('no-valid');
+  }
+
+  // 6) Tipo de cuenta (select): debe elegir una opción
+  if (tipoCuenta.value === '') {
+    tipoCuenta.classList.add('no-valid');
+    isValid = false;
+  } else {
+    tipoCuenta.classList.remove('no-valid');
+  }
+
+  // 7) Calle: no vacío, min 3
+  if (!validarCampoTexto(calle, 3)) isValid = false;
+
+  // 8) Número: no vacío (solo no vacío según enunciado)
+  const valorNumero = numero.value.trim();
+  if (valorNumero === '') {
+    numero.classList.add('no-valid');
+    isValid = false;
+  } else {
+    numero.classList.remove('no-valid');
+  }
+
+  // 9) Intersección: no vacío, min 3
+  if (!validarCampoTexto(interseccion, 3)) isValid = false;
+
+  // 10) Foto (opcional)
+  // Si tu profesor la pide obligatoria, descomenta este bloque:
+  /*
+  if (!foto.files || foto.files.length === 0) {
+    foto.classList.add('no-valid');
+    isValid = false;
+  } else {
+    foto.classList.remove('no-valid');
+  }
+  */
+
+  return isValid;
 }
-
-
-// ==========================================
-// FUNCIONES AUXILIARES (OPCIONALES)
-// ==========================================
-// Puedes crear funciones auxiliares para evitar repetir código
-// Por ejemplo:
 
 /**
- * Valida un campo de texto
- * @param {HTMLElement} campo - El elemento input a validar
- * @param {number} minLength - Longitud mínima requerida
- * @returns {boolean} - true si es válido, false si no
+ * Valida un campo de texto:
+ * - No vacío
+ * - Longitud mínima
+ * Aplica/remueve la clase .no-valid
  */
 function validarCampoTexto(campo, minLength) {
-    const valor = campo.value.trim();
-    
-    if (valor === '' || valor.length < minLength) {
-        campo.classList.add('no-valid');
-        return false;
-    } else {
-        campo.classList.remove('no-valid');
-        return true;
-    }
-}
+  const valor = campo.value.trim();
 
-// Ejemplo de uso de la función auxiliar:
-// if (!validarCampoTexto(nombre, 2)) {
-//     isValid = false;
-// }
+  if (valor === '' || valor.length < minLength) {
+    campo.classList.add('no-valid');
+    return false;
+  } else {
+    campo.classList.remove('no-valid');
+    return true;
+  }
+}
